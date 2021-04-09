@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+	cors: {
+		origin: 'http://gamechanger-wss.herokuapp.com/',
+		methods: ['GET', 'POST'],
+		allowedHeaders: ['allowed-header'],
+		credentials: true,
+	},
+});
 
 require('dotenv').config();
 
