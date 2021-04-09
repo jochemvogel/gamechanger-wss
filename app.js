@@ -1,16 +1,22 @@
+require('dotenv').config();
+
 const express = require('express');
-const app = express();
+
+const PORT = process.env.WSS_PORT || 1234;
+const INDEX = '/index.html';
+
+const app = express().use((req, res) =>
+	res.sendFile(INDEX, { root: __dirname })
+);
+
 const options = {
 	cors: {
 		origin: '*',
 	},
 };
+
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer, options);
-
-require('dotenv').config();
-
-const PORT = process.env.WSS_PORT || 8001;
 
 io.on('connection', (socket) => {
 	console.log('connected');
