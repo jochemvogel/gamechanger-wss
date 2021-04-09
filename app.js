@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server, {
+const options = {
 	cors: {
-		origin: 'http://gamechanger-wss.herokuapp.com/',
-		methods: ['GET', 'POST'],
-		allowedHeaders: ['allowed-header'],
-		credentials: true,
+		origin: '*',
 	},
-});
+};
+const httpServer = require('http').createServer(app);
+const io = require('socket.io')(httpServer, options);
 
 require('dotenv').config();
 
@@ -22,4 +20,4 @@ io.on('connection', (socket) => {
 	});
 });
 
-app.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
