@@ -16,11 +16,12 @@ const options = {
 			'http://localhost:4000/',
 		],
 		methods: ['GET', 'POST'],
+		headers: 'Access-Control-Allow-Origin',
 	},
 };
 
-const httpsServer = require('https').createServer(app);
-const io = require('socket.io')(httpsServer, options);
+const httpServer = require('http').createServer(app);
+const io = require('socket.io')(httpServer, options);
 
 io.on('connection', (socket) => {
 	console.log('connected');
@@ -30,4 +31,4 @@ io.on('connection', (socket) => {
 	});
 });
 
-httpsServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
