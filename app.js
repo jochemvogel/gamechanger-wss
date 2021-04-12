@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 
-const PORT = process.env.WSS_PORT || 1234;
+const PORT = process.env.PORT || 1234;
 const INDEX = '/index.html';
 
 const app = express().use((req, res) =>
