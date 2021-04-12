@@ -1,3 +1,4 @@
+// Backup wss
 require('dotenv').config();
 
 const express = require('express');
@@ -11,7 +12,12 @@ const app = express().use((req, res) =>
 
 const options = {
 	cors: {
-		origin: '*',
+		origin: [
+			'https://gamechanger-rtw.herokuapp.com/',
+			'http://localhost:4000/',
+		],
+		methods: ['GET', 'POST'],
+		headers: 'Access-Control-Allow-Origin',
 	},
 };
 
