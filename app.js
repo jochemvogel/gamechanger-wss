@@ -11,12 +11,16 @@ const app = express().use((req, res) =>
 
 const options = {
 	cors: {
-		origin: '*',
+		origin: [
+			'https://gamechanger-rtw.herokuapp.com/',
+			'http://localhost:4000/',
+		],
+		methods: ['GET', 'POST'],
 	},
 };
 
-const httpServer = require('http').createServer(app);
-const io = require('socket.io')(httpServer, options);
+const httpsServer = require('https').createServer(app);
+const io = require('socket.io')(httpsServer, options);
 
 io.on('connection', (socket) => {
 	console.log('connected');
@@ -26,4 +30,4 @@ io.on('connection', (socket) => {
 	});
 });
 
-httpServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
+httpsServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
