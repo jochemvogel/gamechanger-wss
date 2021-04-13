@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require("express");
 
 const PORT = process.env.PORT || 1234;
@@ -19,14 +17,8 @@ const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, options);
 
 io.on("connection", (socket) => {
-    console.log("connected");
-
-    socket.on("test-msg", () => {
-        io.emit("test-msg");
-    });
-
-    socket.on("match-updated", () => {
-        socket.broadcast.emit("match-updated");
+    socket.on("match-updated", (match) => {
+        socket.broadcast.emit("match-updated", match);
     });
 });
 
