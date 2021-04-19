@@ -20,6 +20,10 @@ io.on("connection", (socket) => {
     socket.on("match-updated", (match) => {
         socket.broadcast.emit("match-updated", match);
     });
+
+    socket.on("chat-message", (userName, chatMessage, matchId) => {
+        socket.broadcast.emit("chat-message", userName, chatMessage, matchId)
+    })
 });
 
 httpServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
