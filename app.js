@@ -22,8 +22,12 @@ io.on("connection", (socket) => {
     });
 
     socket.on("chat-message", (userName, chatMessage, matchId) => {
-        socket.broadcast.emit("chat-message", userName, chatMessage, matchId)
-    })
+        socket.broadcast.emit("chat-message", userName, chatMessage, matchId);
+    });
+
+    socket.on("new-match", () => {
+        socket.broadcast.emit("new-match");
+    });
 });
 
 httpServer.listen(PORT, () => console.log(`Socket listening on port ${PORT}`));
